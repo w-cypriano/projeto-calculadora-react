@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './calculadora.css';
 import {
   Jumbotron,
@@ -9,7 +9,21 @@ import {
   Form
 } from 'react-bootstrap';
 
+
 function Calculadora() {
+  const [txtNumeros, setTxtNumeros] = useState("0")
+
+  function formNumero(num) {
+    setTxtNumeros(txtNumeros + num)
+  }
+
+  function Clear() {
+    setTxtNumeros("0")
+  }
+  function Calcular(value) {
+    console.log(value)
+    setTxtNumeros("result")
+  }
   return (
     <Jumbotron style={{
       background: 'transparent !important',
@@ -21,75 +35,76 @@ function Calculadora() {
       <Container>
         <Row>
           <Col xs="3">
-            <Button variant="danger">C</Button>
+            <Button variant="danger" onClick={() => Clear()}>C</Button>
           </Col>
           <Col xs="9">
             <Form.Control
               name="txtNumeros"
               type="text"
-              class="text-right"
-              roadOnly="roadonly" />
+              className="text-right"
+              roadOnly="roadonly"
+              value={txtNumeros} />
           </Col>
         </Row>
         <Row>
           <Col>
-            <Button variant="light">7</Button>
+            <Button variant="light" onClick={() => formNumero(7)}>7</Button>
           </Col>
           <Col>
-            <Button variant="light">8</Button>
+            <Button variant="light" onClick={() => formNumero(8)}>8</Button>
           </Col>
           <Col>
-            <Button variant="light">9</Button>
+            <Button variant="light" onClick={() => formNumero(9)}>9</Button>
           </Col>
           <Col>
-            <Button variant="warning">/</Button>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Button variant="light">4</Button>
-          </Col>
-          <Col>
-            <Button variant="light">5</Button>
-          </Col>
-          <Col>
-            <Button variant="light">6</Button>
-          </Col>
-          <Col>
-            <Button variant="warning">*</Button>
+            <Button variant="warning" onClick={() => formNumero("/")}>/</Button>
           </Col>
         </Row>
         <Row>
           <Col>
-            <Button variant="light">1</Button>
+            <Button variant="light" onClick={() => formNumero(4)}>4</Button>
           </Col>
           <Col>
-            <Button variant="light">2</Button>
+            <Button variant="light" onClick={() => formNumero(5)}>5</Button>
           </Col>
           <Col>
-            <Button variant="light">3</Button>
+            <Button variant="light" onClick={() => formNumero(6)}>6</Button>
           </Col>
           <Col>
-            <Button variant="warning">-</Button>
+            <Button variant="warning" onClick={() => formNumero("*")}>*</Button>
           </Col>
         </Row>
         <Row>
           <Col>
-            <Button variant="light">0</Button>
+            <Button variant="light" onClick={() => formNumero(1)}>1</Button>
           </Col>
           <Col>
-            <Button variant="light">.</Button>
+            <Button variant="light" onClick={() => formNumero(2)}>2</Button>
           </Col>
           <Col>
-            <Button variant="success">=</Button>
+            <Button variant="light" onClick={() => formNumero(3)}>3</Button>
           </Col>
           <Col>
-            <Button variant="warning">+</Button>
+            <Button variant="warning" onClick={() => formNumero("-")}>-</Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Button variant="light" onClick={() => formNumero(0)}>0</Button>
+          </Col>
+          <Col>
+            <Button variant="light" onClick={() => formNumero(".")}>.</Button>
+          </Col>
+          <Col>
+            <Button variant="success" onClick={(e) => Calcular(e.target.value)}>=</Button>
+          </Col>
+          <Col>
+            <Button variant="warning" onClick={() => formNumero("+")}>+</Button>
           </Col>
         </Row>
       </Container>
 
-    </Jumbotron>
+    </Jumbotron >
   );
 }
 
